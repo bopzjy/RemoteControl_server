@@ -7,7 +7,13 @@ public class Package {
 	public final static int BufferSize = 8192;
 	public final static int UPDATEFILE = 1;
 	public final static int DOWNLOADFILE = 2;
-	public final static int TransOK = 10;
+	public final static int BrowseFile = 3;
+	public final static int BrowseFloder = 4;
+	public final static int DosCmd = 5;	
+	public final static int Directory = 11;
+	public final static int File = 12;
+	public final static int TransOK = 65530;
+	
 	private int ptype;
 	//public String content,response;
 	
@@ -32,6 +38,33 @@ public class Package {
 	
 	public int getPackageType() {
 		return this.ptype;
+	}
+	
+	public String getStringUTF() throws Exception{
+		return in.readUTF();
+	}
+	
+	public void sendStringUTF(String str2send) throws Exception {
+		out.writeUTF(str2send);
+		out.flush();
+	}
+	
+	public long getLong() throws Exception {
+		return in.readLong();
+	}
+	
+	public void sentLong(long long2send) throws Exception{
+		out.writeLong(long2send);
+		out.flush();
+	}
+	
+	public void sendInt(int int2send) throws Exception{
+		out.write(int2send);
+		out.flush();
+	}
+	
+	public int getInt() throws Exception{
+		return in.read();
 	}
 	
 	public void sendPackageType()
